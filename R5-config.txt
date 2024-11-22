@@ -1,0 +1,131 @@
+Current configuration : 1324 bytes
+!
+! Last configuration change at 10:43:35 UTC Thu Nov 21 2024
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname R5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+ip cef
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+memory free low-watermark processor 81225
+!
+!
+spanning-tree mode rapid-pvst
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+interface Loopback0
+ ip address 192.168.1.1 255.255.255.0
+!
+interface Loopback1
+ ip address 192.168.2.1 255.255.255.0
+!
+interface Loopback2
+ ip address 192.168.3.1 255.255.255.0
+!
+interface Ethernet0/0
+ description conn to R1 e0/2
+ ip address 10.1.1.18 255.255.255.252
+ ip ospf network point-to-point
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 1.1.1.5
+ network 10.1.1.16 0.0.0.3 area 2
+ network 192.168.1.0 0.0.0.255 area 2
+ network 192.168.2.0 0.0.0.255 area 2
+ network 192.168.3.0 0.0.0.255 area 2
+!
+ip forward-protocol nd
+!
+!
+ip http server
+ip http secure-server
+ip ssh bulk-mode 131072
+!
+!
+!
+!         
+!
+control-plane
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input ssh
+!
+!
+!
+!
+end

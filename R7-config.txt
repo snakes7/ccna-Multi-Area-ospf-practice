@@ -1,0 +1,139 @@
+Current configuration : 1616 bytes
+!
+! Last configuration change at 11:52:34 UTC Thu Nov 21 2024
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname R7
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name virl.info
+ip cef
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!         
+!
+memory free low-watermark processor 81225
+!
+!
+spanning-tree mode rapid-pvst
+!
+enable secret 9 $9$WNrIyIknRwzsDk$rHV5oLRtQgRZVUAX3RxgEyHS/3tO44D6XPni4B6wTsg
+enable password cisco
+!
+username cisco privilege 15 secret 9 $9$kyAbuEHU05eRBk$5ARcpvolcuA.FNXDvIHW.n2YsuHTz1D1WEm3NZAhEZA
+!
+!
+!
+!
+no cdp run
+!
+! 
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description not connected
+ ip address 192.168.4.1 255.255.255.0
+ shutdown
+!
+interface Loopback1
+ ip address 192.168.5.1 255.255.255.0
+!
+interface Ethernet0/0
+ description connection to SW1 e0/2
+ ip address 10.1.2.2 255.255.255.248
+!
+interface Ethernet0/1
+ description not connected
+ no ip address
+ shutdown
+!
+interface Ethernet0/2
+ description not connected
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ description not connected
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 1.1.1.7
+ network 0.0.0.0 255.255.255.255 area 1
+!
+ip forward-protocol nd
+!
+!
+ip http server
+ip http secure-server
+ip ssh bulk-mode 131072
+ip ssh server algorithm authentication password
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ password cisco
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 720 0
+ password cisco
+ login local
+ transport input telnet ssh
+!
+!
+!         
+!
+end
