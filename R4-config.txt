@@ -1,6 +1,8 @@
-Current configuration : 1102 bytes
+Building configuration...
+
+Current configuration : 1157 bytes
 !
-! Last configuration change at 13:30:11 UTC Thu Nov 21 2024
+! Last configuration change at 23:22:11 UTC Fri Nov 22 2024
 !
 version 17.12
 service timestamps debug datetime msec
@@ -12,6 +14,7 @@ boot-start-marker
 boot-end-marker
 !
 !
+no logging console
 no aaa new-model
 !
 !
@@ -20,7 +23,7 @@ no aaa new-model
 !
 !
 !
-!         
+!
 !
 !
 !
@@ -54,7 +57,6 @@ spanning-tree mode rapid-pvst
 !
 !
 !
-! 
 !
 !
 !
@@ -66,7 +68,8 @@ spanning-tree mode rapid-pvst
 !
 !
 !
-!         
+!
+!
 !
 !
 !
@@ -110,9 +113,11 @@ control-plane
 !
 !
 line con 0
+ exec-timeout 0 0
  logging synchronous
 line aux 0
 line vty 0 4
+ exec-timeout 0 0
  login
  transport input ssh
 !

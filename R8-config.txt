@@ -1,0 +1,359 @@
+Building configuration...
+
+Current configuration : 3831 bytes
+!
+! Last configuration change at 10:59:10 UTC Tue Jan 21 2025
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname iol-1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name virl.info
+ip cef
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+key chain R8-KeyChain
+ key 1
+  key-string myKeyString1_
+  cryptographic-algorithm hmac-sha-512
+!
+crypto pki trustpoint TP-self-signed-131184653
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-131184653
+ revocation-check none
+ rsakeypair TP-self-signed-131184653
+ hash sha256
+!
+!
+crypto pki certificate chain TP-self-signed-131184653
+ certificate self-signed 01
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  30312E30 2C060355 04030C25 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31333131 38343635 33301E17 0D323530 31323130 38323534 
+  345A170D 33353031 32313038 32353434 5A303031 2E302C06 03550403 0C25494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3133 31313834 
+  36353330 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 B7DEF920 E0DB1876 64014C46 771DFFB5 3764A06A 74122A63 0B5E9CA4 
+  7461E75D 4DE81CE6 152A2D94 3E71EF99 E89C6F22 74CA3E48 9D376EB0 15EA5847 
+  C2BE78B3 A1CFF52E B30FF4F9 4CBE5E3B A378E159 F9ED3494 662FBCE2 017258FE 
+  E827691A E97B29C8 5021914F C321B2CD F77C6944 879A4A9C C2D165BE 04499FD5 
+  410CB599 BC2E099E FC61EA55 B2BF2A7E 72B8189F BEE0C589 002917B9 666C7F87 
+  1E443FE1 CACBF285 12AAE1FF 62918990 FA7D5889 12442A12 44FA810D A248E872 
+  45F823B6 06D54665 D3BDEE4D 2F3E2618 713C5E72 C0385D65 C042C57B 7EF2AD9E 
+  F5AD773A 8CF1770E A5E24189 2603697D 9BAC8038 389F94D5 F0638953 0D8A6145 
+  3A38FE89 02030100 01A35330 51301D06 03551D0E 04160414 559E0D57 29BB7519 
+  9E28426F E192D549 D2ED3229 301F0603 551D2304 18301680 14559E0D 5729BB75 
+  199E2842 6FE192D5 49D2ED32 29300F06 03551D13 0101FF04 05300301 01FF300D 
+  06092A86 4886F70D 01010B05 00038201 01004BA2 DB4B94D5 50964CBF AF397BA8 
+  91CAF264 DCF4EE8A A8EBEEDA C57242BD 61DA509F 0FA110DC A7B66B3D 9CAD4E05 
+  14CACA2D A85E7E63 B52A4E01 121D2377 C3742E70 A67D6E12 89E56FA3 426D9B37 
+  EFED81C5 D6F52AF8 DE0E2A0B BD531CF4 939E51B2 52AF0F0D 6533B624 889BC7D6 
+  D44F04F7 2BBEA293 DBA74475 372F51C7 5E6271B0 67861FEF DB900B2D 380E2385 
+  B11E3284 01ECB0B7 E782894C 3699638C FE288509 F2EA1A28 1961DDBF 8FF52027 
+  FF706B8C 113CFB5E BD99745B 3B9604B6 B24F2226 45FBC569 FC96A75D F90BDC80 
+  69FED5D7 6ED49B8A BCC94303 057DAD19 87F9F13E C1F22E90 CBCA16E9 D56019B0 
+  99C65377 F1E121C4 26D59B47 9BF0675D CA6A
+  	quit
+!
+!
+memory free low-watermark processor 81225
+!
+!
+spanning-tree mode rapid-pvst
+!
+!
+username cisco privilege 15 secret 9 $9$Z3CDfwxBACQIh.$M6krYHTU4QARtOHLOcP/3.5v/azucj3gqvQGCsA150I
+!
+!
+!
+!
+no cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description not connected
+ no ip address
+ shutdown
+!
+interface Ethernet0/0
+ description to Ethernet0/3.iol-l2-0
+ ip address 10.1.2.4 255.255.255.248
+ ip ospf authentication key-chain R8-KeyChain
+ ip ospf network broadcast
+!
+interface Ethernet0/1
+ description not connected
+ no ip address
+ shutdown
+!
+interface Ethernet0/2
+ description not connected
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ description not connected
+ no ip address
+ shutdown
+!
+router ospf 1
+ network 0.0.0.0 255.255.255.255 area 1
+!
+ip forward-protocol nd
+!
+!
+ip http server
+ip http secure-server
+ip ssh bulk-mode 131072
+ip ssh server algorithm authentication password
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ password cisco
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password cisco
+ login local
+ transport input telnet ssh
+!
+!
+!
+!
+endBuilding configuration...
+
+Current configuration : 3831 bytes
+!
+! Last configuration change at 10:59:10 UTC Tue Jan 21 2025
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname iol-1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name virl.info
+ip cef
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+key chain R8-KeyChain
+ key 1
+  key-string myKeyString1_
+  cryptographic-algorithm hmac-sha-512
+!
+crypto pki trustpoint TP-self-signed-131184653
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-131184653
+ revocation-check none
+ rsakeypair TP-self-signed-131184653
+ hash sha256
+!
+!
+crypto pki certificate chain TP-self-signed-131184653
+ certificate self-signed 01
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  30312E30 2C060355 04030C25 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31333131 38343635 33301E17 0D323530 31323130 38323534 
+  345A170D 33353031 32313038 32353434 5A303031 2E302C06 03550403 0C25494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3133 31313834 
+  36353330 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 B7DEF920 E0DB1876 64014C46 771DFFB5 3764A06A 74122A63 0B5E9CA4 
+  7461E75D 4DE81CE6 152A2D94 3E71EF99 E89C6F22 74CA3E48 9D376EB0 15EA5847 
+  C2BE78B3 A1CFF52E B30FF4F9 4CBE5E3B A378E159 F9ED3494 662FBCE2 017258FE 
+  E827691A E97B29C8 5021914F C321B2CD F77C6944 879A4A9C C2D165BE 04499FD5 
+  410CB599 BC2E099E FC61EA55 B2BF2A7E 72B8189F BEE0C589 002917B9 666C7F87 
+  1E443FE1 CACBF285 12AAE1FF 62918990 FA7D5889 12442A12 44FA810D A248E872 
+  45F823B6 06D54665 D3BDEE4D 2F3E2618 713C5E72 C0385D65 C042C57B 7EF2AD9E 
+  F5AD773A 8CF1770E A5E24189 2603697D 9BAC8038 389F94D5 F0638953 0D8A6145 
+  3A38FE89 02030100 01A35330 51301D06 03551D0E 04160414 559E0D57 29BB7519 
+  9E28426F E192D549 D2ED3229 301F0603 551D2304 18301680 14559E0D 5729BB75 
+  199E2842 6FE192D5 49D2ED32 29300F06 03551D13 0101FF04 05300301 01FF300D 
+  06092A86 4886F70D 01010B05 00038201 01004BA2 DB4B94D5 50964CBF AF397BA8 
+  91CAF264 DCF4EE8A A8EBEEDA C57242BD 61DA509F 0FA110DC A7B66B3D 9CAD4E05 
+  14CACA2D A85E7E63 B52A4E01 121D2377 C3742E70 A67D6E12 89E56FA3 426D9B37 
+  EFED81C5 D6F52AF8 DE0E2A0B BD531CF4 939E51B2 52AF0F0D 6533B624 889BC7D6 
+  D44F04F7 2BBEA293 DBA74475 372F51C7 5E6271B0 67861FEF DB900B2D 380E2385 
+  B11E3284 01ECB0B7 E782894C 3699638C FE288509 F2EA1A28 1961DDBF 8FF52027 
+  FF706B8C 113CFB5E BD99745B 3B9604B6 B24F2226 45FBC569 FC96A75D F90BDC80 
+  69FED5D7 6ED49B8A BCC94303 057DAD19 87F9F13E C1F22E90 CBCA16E9 D56019B0 
+  99C65377 F1E121C4 26D59B47 9BF0675D CA6A
+  	quit
+!
+!
+memory free low-watermark processor 81225
+!
+!
+spanning-tree mode rapid-pvst
+!
+!
+username cisco privilege 15 secret 9 $9$Z3CDfwxBACQIh.$M6krYHTU4QARtOHLOcP/3.5v/azucj3gqvQGCsA150I
+!
+!
+!
+!
+no cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description not connected
+ no ip address
+ shutdown
+!
+interface Ethernet0/0
+ description to Ethernet0/3.iol-l2-0
+ ip address 10.1.2.4 255.255.255.248
+ ip ospf authentication key-chain R8-KeyChain
+ ip ospf network broadcast
+!
+interface Ethernet0/1
+ description not connected
+ no ip address
+ shutdown
+!
+interface Ethernet0/2
+ description not connected
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ description not connected
+ no ip address
+ shutdown
+!
+router ospf 1
+ network 0.0.0.0 255.255.255.255 area 1
+!
+ip forward-protocol nd
+!
+!
+ip http server
+ip http secure-server
+ip ssh bulk-mode 131072
+ip ssh server algorithm authentication password
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ password cisco
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password cisco
+ login local
+ transport input telnet ssh
+!
+!
+!
+!
+end

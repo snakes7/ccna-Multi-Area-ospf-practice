@@ -1,6 +1,8 @@
-Current configuration : 1616 bytes
+Building configuration...
+
+Current configuration : 1651 bytes
 !
-! Last configuration change at 11:52:34 UTC Thu Nov 21 2024
+! Last configuration change at 23:22:09 UTC Fri Nov 22 2024
 !
 version 17.12
 service timestamps debug datetime msec
@@ -12,6 +14,7 @@ boot-start-marker
 boot-end-marker
 !
 !
+no logging console
 no aaa new-model
 !
 !
@@ -20,7 +23,7 @@ no aaa new-model
 !
 !
 !
-!         
+!
 !
 !
 !
@@ -43,7 +46,7 @@ multilink bundle-name authenticated
 !
 !
 !
-!         
+!
 !
 memory free low-watermark processor 81225
 !
@@ -60,12 +63,12 @@ username cisco privilege 15 secret 9 $9$kyAbuEHU05eRBk$5ARcpvolcuA.FNXDvIHW.n2Ys
 !
 no cdp run
 !
-! 
 !
 !
 !
 !
-!         
+!
+!
 !
 !
 !
@@ -124,16 +127,17 @@ control-plane
 !
 !
 line con 0
+ exec-timeout 0 0
  password cisco
  logging synchronous
 line aux 0
 line vty 0 4
- exec-timeout 720 0
+ exec-timeout 0 0
  password cisco
  login local
  transport input telnet ssh
 !
 !
-!         
+!
 !
 end
